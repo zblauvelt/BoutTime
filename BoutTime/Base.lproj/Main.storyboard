@@ -197,6 +197,12 @@
                             <constraint firstItem="aDm-As-4O3" firstAttribute="top" secondItem="Fju-NU-t5b" secondAttribute="bottom" id="id1-6Z-1Tj"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="firstEventLbl" destination="l0w-s8-HAO" id="dPA-7I-bQq"/>
+                        <outlet property="fourthEventLbl" destination="705-kr-LEH" id="wmL-AW-E4a"/>
+                        <outlet property="secondEventLbl" destination="41n-dA-N0O" id="jWL-GU-CWa"/>
+                        <outlet property="thirdEventLbl" destination="LhA-wU-tER" id="xHV-PA-oti"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

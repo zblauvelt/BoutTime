@@ -10,26 +10,29 @@ import UIKit
 import GameKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var firstEventLbl: UILabel!
     @IBOutlet weak var secondEventLbl: UILabel!
     @IBOutlet weak var thirdEventLbl: UILabel!
     @IBOutlet weak var fourthEventLbl: UILabel!
-
+    @IBAction func unwindToVC(segue: UIStoryboardSegue) {}
     
     var indexOfSelectedEvent = 0
     var previousNumber = GKRandomSource.sharedRandom().nextInt(upperBound: americanEvents.count)
     var usedIndex = [Int]()
     var roundEvents = [Int]()
-    var submittedAnswerYears = [Any]()
-    var correctAnswerYears = [Any]()
+    var submittedAnswerYears = [Int]()
     let numberOfEvents = 4
+    let numberOfRounds = 6
+    var round = 1
+    var score = 0
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         createRound()
-       
+        checkAnswer()
+        
     }
     
     //MARK: Display Events
@@ -62,6 +65,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func buttonAction(_ sender: UIButton) {
+        
+        submittedAnswerYears.removeAll()
+        
         switch sender.tag {
         case 1:
             moveEvents(fromIndex: 0, toIndex: 1)
@@ -83,6 +89,7 @@ class ViewController: UIViewController {
             displayRound()
         default:
             print("It didn't work")
+            checkAnswer()
         }
     }
     
@@ -101,28 +108,77 @@ class ViewController: UIViewController {
         thirdEventLbl.text = americanEvents[thirdEvent].eventDescription
         fourthEventLbl.text = americanEvents[fourthEvent].eventDescription
         
-        let submittedAnswerDict = [americanEvents[firstEvent].eventYear,
-                                   americanEvents[secondEvent].eventYear,
-                                   americanEvents[thirdEvent].eventYear,
-                                   americanEvents[fourthEvent].eventYear]
         
-        submittedAnswerYears.append(submittedAnswerDict)
-    }
+        for roundIndex in roundEvents {
+            submittedAnswerYears.append(americanEvents[roundIndex].eventYear)
+        }
+        
+        print("ZACK: Submitted Answer \(submittedAnswerYears)")    }
     
     
     //MARK: Check Answer
     
-    /*func checkAnswer() {
-        if submittedAnswerYears == submittedAnswerYears.sorted(by: <#(Any, Any) -> Bool#>) {
-            print("true")
-        } else {
-            print("false")
+    func checkAnswer() {
+        let correctAnswer = submittedAnswerYears.sorted { (left: Int, right: Int) -> Bool in
+            left < right
         }
         
+        print("ZACK: Correct Answer \(correctAnswer)")
+        
+        if submittedAnswerYears == correctAnswer {
+            
+            score += 1
+            print("ZACK: Answer is Correct Score is \(score)")
+            
+        } else {
+            print("ZACK: Answer is Incorrect")
         }
-*/
-
-
+    }
+    
+    //MARK: Update Round
+    
+    func updateRound() {
+        switch round {
+        case  1...5:
+            checkAnswer()
+            round += 1
+            print("ZACK: Round: \(round)")
+            usedIndex.removeAll()
+            roundEvents.removeAll()
+            submittedAnswerYears.removeAll()
+            createRound()
+        default:
+            print("round 6")
+            usedIndex.removeAll()
+            roundEvents.removeAll()
+            submittedAnswerYears.removeAll()
+            createRound()
+            
+            //FIXME: Need to fix segue to send variable
+            
+            func prepare(for segue: UIStoryboardSegue, sender: Any) {
+                if segue.identifier == "showScore"{
+                if let scoreController = segue.destination as? ScoreController {
+                    scoreController.totalScore = score
+                }
+                }
+        }
+            performSegue(withIdentifier: "showScore", sender: nil)
+            
+            round = 1
+            score = 0
+        }
+        
+    }
+    
+    //MARK: Shake Gesture
+    
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            updateRound()
+        }
+    }
+    
 }
 
 

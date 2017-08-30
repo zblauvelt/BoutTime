@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		143990011F563FB800F5FB2A /* ScoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143990001F563FB800F5FB2A /* ScoreController.swift */; };
 		14941AFA1F4CFD7E00C03AE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14941AF91F4CFD7E00C03AE5 /* AppDelegate.swift */; };
 		14941AFC1F4CFD7E00C03AE5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14941AFB1F4CFD7E00C03AE5 /* ViewController.swift */; };
 		14941AFF1F4CFD7E00C03AE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14941AFD1F4CFD7E00C03AE5 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		143990001F563FB800F5FB2A /* ScoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreController.swift; sourceTree = "<group>"; };
 		14941AF61F4CFD7E00C03AE5 /* BoutTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoutTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14941AF91F4CFD7E00C03AE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14941AFB1F4CFD7E00C03AE5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				14941B001F4CFD7F00C03AE5 /* Assets.xcassets */,
 				14941B021F4CFD7F00C03AE5 /* LaunchScreen.storyboard */,
 				14941B051F4CFD7F00C03AE5 /* Info.plist */,
+				143990001F563FB800F5FB2A /* ScoreController.swift */,
 			);
 			path = BoutTime;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				143990011F563FB800F5FB2A /* ScoreController.swift in Sources */,
 				14941B0C1F4FA0BE00C03AE5 /* Events.swift in Sources */,
 				14941AFC1F4CFD7E00C03AE5 /* ViewController.swift in Sources */,
 				14941AFA1F4CFD7E00C03AE5 /* AppDelegate.swift in Sources */,
@@ -306,6 +310,7 @@
 				14941B0A1F4CFD7F00C03AE5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

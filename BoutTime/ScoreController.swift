@@ -20,8 +20,12 @@ class ScoreController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scoreLbl.text = "\(String(describing: totalScore))/6)"
-
+        //scoreLbl.text = "\(String(describing: totalScore))/6)"
+        if let finalScore = totalScore {
+            scoreLbl.text = "\(finalScore)/6"
+        } else{
+            scoreLbl.text = "No Score"
+        }
     }
 
 

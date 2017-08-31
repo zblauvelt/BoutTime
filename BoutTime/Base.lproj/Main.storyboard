@@ -186,7 +186,7 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fju-NU-t5b">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fju-NU-t5b">
                                 <rect key="frame" x="167" y="591" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="Kbv-Xg-LyV"/>
@@ -197,11 +197,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shake to Complete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDm-As-4O3">
-                                <rect key="frame" x="108.33333333333334" y="671" width="197.66666666666666" height="30.333333333333371"/>
+                                <rect key="frame" x="132" y="671" width="150.33333333333331" height="30.333333333333371"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="22"/>
                                 <color key="textColor" red="0.12038642913103104" green="0.40166997909545898" blue="0.53228205442428589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yEl-0s-FZQ">
+                                <rect key="frame" x="132" y="609" width="150" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="ciV-um-ae4"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="next_round_success"/>
+                                <connections>
+                                    <action selector="nextRound:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IDW-ac-YAJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0084041617810726166" green="0.16255128383636475" blue="0.2954271137714386" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -211,8 +221,12 @@
                             <constraint firstAttribute="trailing" secondItem="8c4-sT-H0d" secondAttribute="trailing" constant="30" id="RPB-ee-t9d"/>
                             <constraint firstItem="8c4-sT-H0d" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="TLg-Is-DZF"/>
                             <constraint firstItem="8c4-sT-H0d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="UwC-8l-uEb"/>
+                            <constraint firstItem="yEl-0s-FZQ" firstAttribute="leading" secondItem="aDm-As-4O3" secondAttribute="leading" id="Z7m-LO-rJf"/>
+                            <constraint firstItem="yEl-0s-FZQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dsG-Kq-i06"/>
                             <constraint firstItem="Fju-NU-t5b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="g8N-UR-V43"/>
+                            <constraint firstItem="aDm-As-4O3" firstAttribute="top" secondItem="yEl-0s-FZQ" secondAttribute="bottom" constant="17" id="hgP-GY-sBc"/>
                             <constraint firstItem="aDm-As-4O3" firstAttribute="top" secondItem="Fju-NU-t5b" secondAttribute="bottom" id="id1-6Z-1Tj"/>
+                            <constraint firstItem="yEl-0s-FZQ" firstAttribute="centerY" secondItem="Fju-NU-t5b" secondAttribute="centerY" id="yHI-tu-wMc"/>
                         </constraints>
                     </view>
                     <connections>
@@ -220,12 +234,13 @@
                         <outlet property="fourthEventLbl" destination="705-kr-LEH" id="wmL-AW-E4a"/>
                         <outlet property="secondEventLbl" destination="41n-dA-N0O" id="jWL-GU-CWa"/>
                         <outlet property="thirdEventLbl" destination="LhA-wU-tER" id="xHV-PA-oti"/>
+                        <outlet property="timerOutlet" destination="Fju-NU-t5b" id="rWT-4N-lz5"/>
                         <segue destination="KUr-Rw-5FO" kind="show" identifier="showScore" id="RdH-vj-5Lz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-884" y="-42"/>
+            <point key="canvasLocation" x="-884.05797101449286" y="-42.391304347826093"/>
         </scene>
         <!--Score Controller-->
         <scene sceneID="A2u-vG-sem">
@@ -295,6 +310,7 @@
     <resources>
         <image name="down_full" width="158" height="457"/>
         <image name="down_half" width="158" height="229"/>
+        <image name="next_round_success" width="558" height="142"/>
         <image name="up_full" width="158" height="457"/>
         <image name="up_half" width="158" height="229"/>
     </resources>

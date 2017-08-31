@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var thirdEventLbl: UILabel!
     @IBOutlet weak var fourthEventLbl: UILabel!
     @IBAction func unwindToVC(segue: UIStoryboardSegue) {}
+    @IBOutlet weak var timerOutlet: UILabel!
     
     var indexOfSelectedEvent = 0
     var previousNumber = GKRandomSource.sharedRandom().nextInt(upperBound: americanEvents.count)
@@ -26,13 +27,23 @@ class ViewController: UIViewController {
     let numberOfRounds = 6
     var round = 1
     var score = 0
+    var seconds = 60
+    var timer = Timer()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         createRound()
         checkAnswer()
+        runTimer()
         
+    }
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showScore"{
+            if let scoreController = segue.destination as? ScoreController {
+                scoreController.totalScore = score
+            }
+        }
     }
     
     //MARK: Display Events
@@ -54,6 +65,7 @@ class ViewController: UIViewController {
             print(roundEvents)
         }
         displayRound()
+
         
     }
     
@@ -153,16 +165,6 @@ class ViewController: UIViewController {
             roundEvents.removeAll()
             submittedAnswerYears.removeAll()
             createRound()
-            
-            //FIXME: Need to fix segue to send variable
-            
-            func prepare(for segue: UIStoryboardSegue, sender: Any) {
-                if segue.identifier == "showScore"{
-                if let scoreController = segue.destination as? ScoreController {
-                    scoreController.totalScore = score
-                }
-                }
-        }
             performSegue(withIdentifier: "showScore", sender: nil)
             
             round = 1
@@ -178,6 +180,28 @@ class ViewController: UIViewController {
             updateRound()
         }
     }
+    
+    //MARK: Timer
+    
+    func updateTimer() {
+        
+        if seconds < 1 {
+            timer.invalidate()
+        } else {
+        seconds -= 1
+        timerOutlet.text = "\(seconds)"
+        }
+    }
+    
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+    }
+    
+    @IBAction func nextRound(_ sender: Any) {
+        updateRound()
+    }
+
+    
     
 }
 

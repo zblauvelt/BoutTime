@@ -15,8 +15,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var secondEventLbl: UILabel!
     @IBOutlet weak var thirdEventLbl: UILabel!
     @IBOutlet weak var fourthEventLbl: UILabel!
-    @IBAction func unwindToVC(segue: UIStoryboardSegue) {}
+    @IBAction func unwindToVC(segue: UIStoryboardSegue) {
+        timerOutlet.text = "\(seconds)"
+        createRound()
+        runTimer()
+    }
     @IBOutlet weak var timerOutlet: UILabel!
+    @IBOutlet weak var nextRoundbtn: UIButton!
+    let successImage = UIImage(named: "next_round_success.png") as UIImage?
+    let failImage = UIImage(named: "next_round_fail.png") as UIImage?
+
     
     var indexOfSelectedEvent = 0
     var previousNumber = GKRandomSource.sharedRandom().nextInt(upperBound: americanEvents.count)
@@ -31,10 +39,11 @@ class ViewController: UIViewController {
     var timer = Timer()
     
     
+    
     override func viewDidLoad() {
+        nextRoundbtn.isHidden = true
         super.viewDidLoad()
         createRound()
-        checkAnswer()
         runTimer()
         
     }
@@ -56,7 +65,9 @@ class ViewController: UIViewController {
             previousNumber = indexOfSelectedEvent
             usedIndex.append(previousNumber)
             
+            
             return indexOfSelectedEvent
+            
         }
         
         while roundEvents.count < numberOfEvents  {
@@ -101,7 +112,6 @@ class ViewController: UIViewController {
             displayRound()
         default:
             print("It didn't work")
-            checkAnswer()
         }
     }
     
@@ -110,6 +120,7 @@ class ViewController: UIViewController {
     //MARK: Create Round
     
     func displayRound() {
+        
         let firstEvent = roundEvents[0]
         let secondEvent = roundEvents[1]
         let thirdEvent = roundEvents[2]
@@ -125,7 +136,9 @@ class ViewController: UIViewController {
             submittedAnswerYears.append(americanEvents[roundIndex].eventYear)
         }
         
-        print("ZACK: Submitted Answer \(submittedAnswerYears)")    }
+        print("ZACK: Submitted Answer \(submittedAnswerYears)")
+        
+    }
     
     
     //MARK: Check Answer
@@ -141,8 +154,15 @@ class ViewController: UIViewController {
             
             score += 1
             print("ZACK: Answer is Correct Score is \(score)")
+            timerOutlet.isHidden = true
+            nextRoundbtn.setBackgroundImage(successImage, for: UIControlState.normal)
+            nextRoundbtn.isHidden = false
+            
             
         } else {
+            timerOutlet.isHidden = true
+            nextRoundbtn.isHidden = false
+            nextRoundbtn.setBackgroundImage(failImage, for: UIControlState.normal)
             print("ZACK: Answer is Incorrect")
         }
     }
@@ -152,32 +172,39 @@ class ViewController: UIViewController {
     func updateRound() {
         switch round {
         case  1...5:
-            checkAnswer()
             round += 1
             print("ZACK: Round: \(round)")
             usedIndex.removeAll()
             roundEvents.removeAll()
             submittedAnswerYears.removeAll()
+            seconds = 60
+            timerOutlet.text = "\(seconds)"
+            runTimer()
             createRound()
         default:
             print("round 6")
+            timer.invalidate()
+            seconds = 60
             usedIndex.removeAll()
             roundEvents.removeAll()
             submittedAnswerYears.removeAll()
-            createRound()
             performSegue(withIdentifier: "showScore", sender: nil)
             
             round = 1
             score = 0
         }
         
+
     }
     
     //MARK: Shake Gesture
     
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            updateRound()
+            timer.invalidate()
+            checkAnswer()
+            nextRoundbtn.isHidden = false
+            timerOutlet.isHidden = true
         }
     }
     
@@ -187,6 +214,9 @@ class ViewController: UIViewController {
         
         if seconds < 1 {
             timer.invalidate()
+            checkAnswer()
+            nextRoundbtn.isHidden = false
+            timerOutlet.isHidden = true
         } else {
         seconds -= 1
         timerOutlet.text = "\(seconds)"
@@ -199,6 +229,10 @@ class ViewController: UIViewController {
     
     @IBAction func nextRound(_ sender: Any) {
         updateRound()
+        timerOutlet.isHidden = false
+        nextRoundbtn.isHidden = true
+        
+
     }
 
     

@@ -34,7 +34,7 @@ var americanEvents: [AmericanEvents] = [
     AmericanEvents(eventDescription: "Gold discovered in California", eventYear: 1848),
     AmericanEvents(eventDescription: "Battle of Gettysburg", eventYear: 1863),
     AmericanEvents(eventDescription: "Ford Motor Company formed", eventYear: 1903),
-    AmericanEvents(eventDescription: "WW1 started 28", eventYear: 1914),
+    AmericanEvents(eventDescription: "World War I started", eventYear: 1914),
     AmericanEvents(eventDescription: "Germany invades Poland; World War II begins", eventYear: 1939),
     AmericanEvents(eventDescription: "The Cold War began between the United States and the Soviet Union", eventYear: 1946),
     AmericanEvents(eventDescription: "Thirty - Fifth President of the US is John Fitzgerald Kennedy", eventYear: 1961),
